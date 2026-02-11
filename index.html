@@ -29,6 +29,19 @@
             --gradient-warm: linear-gradient(135deg, #FFB88C 0%, #FF8C5A 100%);
         }
 
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #0F1419;
+                --bg-secondary: #1A1F2E;
+                --bg-card: #1E2430;
+                --text-primary: #E8EBF0;
+                --text-secondary: #B4B9C5;
+                --text-muted: #8B91A0;
+                --border: #2D3442;
+            }
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-primary);
@@ -51,6 +64,17 @@
                 linear-gradient(135deg, #FAFBFC 0%, #F5F6F8 50%, #FAFBFC 100%);
             background-size: 200% 200%;
             animation: gradientDrift 20s ease infinite;
+        }
+
+        /* Dark mode background */
+        @media (prefers-color-scheme: dark) {
+            .bg-animated {
+                background: 
+                    radial-gradient(ellipse at 20% 30%, rgba(255, 107, 53, 0.08) 0%, transparent 50%),
+                    radial-gradient(ellipse at 80% 70%, rgba(247, 147, 30, 0.05) 0%, transparent 50%),
+                    linear-gradient(135deg, #0F1419 0%, #1A1F2E 50%, #0F1419 100%);
+                background-size: 200% 200%;
+            }
         }
 
         /* Soft Noise Texture Overlay */
@@ -100,6 +124,13 @@
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             box-shadow: 0 2px 12px rgba(255, 107, 53, 0.06);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            header {
+                background: rgba(30, 36, 48, 0.95);
+                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+            }
         }
 
         .header-container {
@@ -476,6 +507,18 @@
             box-shadow: 0 2px 12px rgba(255, 107, 53, 0.06);
         }
 
+        @media (prefers-color-scheme: dark) {
+            .value-card {
+                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+            }
+            
+            .value-card:hover {
+                box-shadow: 
+                    0 20px 40px rgba(255, 107, 53, 0.2),
+                    0 0 0 1px rgba(255, 107, 53, 0.15);
+            }
+        }
+
         .value-card::before {
             content: '';
             position: absolute;
@@ -569,7 +612,13 @@
         input[type="text"]:focus {
             outline: none;
             border-color: var(--accent-primary);
-            box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.1);
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            input[type="text"]::placeholder {
+                color: var(--text-muted);
+            }
         }
 
         select {
@@ -592,7 +641,14 @@
         select:focus {
             outline: none;
             border-color: var(--accent-primary);
-            box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.1);
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            select option {
+                background: var(--bg-card);
+                color: var(--text-primary);
+            }
         }
 
         /* Stats Bar */
@@ -659,6 +715,14 @@
                 0 0 0 1px rgba(255, 107, 53, 0.08);
         }
 
+        @media (prefers-color-scheme: dark) {
+            .domain-card:hover {
+                box-shadow: 
+                    0 25px 50px rgba(255, 107, 53, 0.2),
+                    0 0 0 1px rgba(255, 107, 53, 0.15);
+            }
+        }
+
         .domain-card:hover::after {
             transform: scaleX(1);
         }
@@ -716,6 +780,12 @@
             padding: 1rem 1.25rem;
             border-radius: 10px;
             margin-bottom: 1.5rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .market-insight {
+                background: linear-gradient(135deg, rgba(255, 107, 53, 0.12) 0%, rgba(247, 147, 30, 0.08) 100%);
+            }
         }
 
         .insight-label {
@@ -1360,5 +1430,3 @@
     </script>
 </body>
 </html>
-
-
