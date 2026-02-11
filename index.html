@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Domain Marketplace</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Premium Domain Marketplace - Own Tomorrow's Brands Today</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,417 +13,826 @@
         }
 
         :root {
-            --bg-primary: #fafafa;
-            --bg-secondary: #ffffff;
-            --bg-tertiary: #f5f5f5;
-            --text-primary: #0a0a0a;
-            --text-secondary: #525252;
-            --text-muted: #a3a3a3;
-            --accent: #2563eb;
-            --accent-hover: #1d4ed8;
-            --accent-light: #dbeafe;
-            --border: #e5e5e5;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05);
-            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.05);
-            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --bg-primary: #0f0f17;
+            --bg-secondary: #1a1a2e;
+            --bg-card: #16213e;
+            --text-primary: #e4e4f0;
+            --text-secondary: #a8b2d1;
+            --text-muted: #6b7a99;
+            --accent-primary: #00d9ff;
+            --accent-secondary: #7c3aed;
+            --accent-success: #22c55e;
+            --border: #2d3654;
+            --gradient-primary: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%);
+            --gradient-accent: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         body {
-            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-animated {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.04;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--accent-primary) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, var(--accent-secondary) 0%, transparent 50%);
+            animation: bgFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 50px) scale(1.1); }
         }
 
         /* Header */
         header {
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
-            padding: 2rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(12px);
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
         }
 
-        .container {
-            max-width: 1280px;
+        .header-container {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .header-content {
+            padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
         }
 
         .logo {
-            font-family: 'Epilogue', sans-serif;
-            font-size: 1.75rem;
-            font-weight: 900;
-            letter-spacing: -0.02em;
-            background: var(--gradient);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
         }
 
         .header-stats {
             display: flex;
-            gap: 2rem;
-            font-size: 0.875rem;
+            gap: 3rem;
         }
 
-        .stat {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stat-value {
-            font-family: 'Epilogue', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-primary);
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* Hero */
-        .hero {
-            padding: 4rem 0 3rem;
+        .stat-item {
             text-align: center;
         }
 
-        h1 {
-            font-family: 'Epilogue', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 900;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #0a0a0a 0%, #525252 100%);
+        .stat-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        /* Geometric Background Animation */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(0, 217, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(124, 58, 237, 0.08) 0%, transparent 50%);
+            border-radius: 50%;
+            animation: heroGlow 8s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes heroGlow {
+            0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 0.6; }
+            50% { transform: translate(-50%, -50%) scale(1.1) rotate(180deg); opacity: 0.8; }
+        }
+
+        .geometric-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.06;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape.circle {
+            border: 2px solid var(--accent-primary);
+            border-radius: 50%;
+        }
+
+        .shape.square {
+            border: 2px solid var(--accent-secondary);
+            transform: rotate(45deg);
+        }
+
+        .shape.triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 87px solid var(--accent-primary);
+            opacity: 0.04;
+        }
+
+        .shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 15s;
+        }
+
+        .shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+            animation-duration: 20s;
+        }
+
+        .shape:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            top: 30%;
+            left: 70%;
+            animation-delay: 4s;
+            animation-duration: 18s;
+        }
+
+        .shape:nth-child(4) {
+            width: 120px;
+            height: 120px;
+            top: 70%;
+            left: 20%;
+            animation-delay: 1s;
+            animation-duration: 22s;
+        }
+
+        .shape:nth-child(5) {
+            top: 20%;
+            left: 50%;
+            animation-delay: 3s;
+            animation-duration: 16s;
+        }
+
+        .shape:nth-child(6) {
+            width: 90px;
+            height: 90px;
+            top: 50%;
+            left: 15%;
+            animation-delay: 5s;
+            animation-duration: 19s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(30px, -30px) rotate(90deg);
+            }
+            50% {
+                transform: translate(-20px, 20px) rotate(180deg);
+            }
+            75% {
+                transform: translate(20px, 30px) rotate(270deg);
+            }
+        }
+
+        /* Grid Pattern Background */
+        .grid-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Particles Network */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            opacity: 0.4;
+            box-shadow: 0 0 10px var(--accent-primary);
+        }
+
+        .particle::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--accent-primary), transparent);
+            top: 0;
+            left: 1px;
+            opacity: 0.3;
+            animation: particleLine 3s ease-in-out infinite;
+        }
+
+        @keyframes particleLine {
+            0%, 100% { transform: scaleY(0); opacity: 0; }
+            50% { transform: scaleY(1); opacity: 0.3; }
+        }
+
+        .particle:nth-child(1) { top: 15%; left: 20%; animation: particleFloat 8s infinite; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 45%; left: 60%; animation: particleFloat 10s infinite; animation-delay: 1s; }
+        .particle:nth-child(3) { top: 75%; left: 30%; animation: particleFloat 12s infinite; animation-delay: 2s; }
+        .particle:nth-child(4) { top: 25%; left: 80%; animation: particleFloat 9s infinite; animation-delay: 1.5s; }
+        .particle:nth-child(5) { top: 65%; left: 70%; animation: particleFloat 11s infinite; animation-delay: 0.5s; }
+        .particle:nth-child(6) { top: 35%; left: 15%; animation: particleFloat 10s infinite; animation-delay: 2.5s; }
+
+        @keyframes particleFloat {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(20px, -20px); }
+            50% { transform: translate(-15px, 15px); }
+            75% { transform: translate(15px, 20px); }
+        }
+
+        h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #ffffff 0%, #00d9ff 50%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+            background-size: 200% auto;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
         }
 
         .subtitle {
-            font-size: 1.125rem;
+            font-size: 1.25rem;
             color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 2.5rem;
-            font-weight: 400;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        /* Value Proposition Cards */
+        .value-props {
+            max-width: 1400px;
+            margin: 0 auto 5rem;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .value-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .value-card:hover::before {
+            left: 100%;
+        }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .value-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent-primary);
+        }
+
+        .value-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
         }
 
         /* Filters */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
         .filters {
-            background: var(--bg-secondary);
-            padding: 1.5rem 2rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow-sm);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
             margin-bottom: 3rem;
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
             align-items: center;
         }
 
         .search-wrapper {
             flex: 1;
-            min-width: 280px;
+            min-width: 300px;
             position: relative;
         }
 
         .search-icon {
             position: absolute;
-            left: 1rem;
+            left: 1.25rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 1.125rem;
+            font-size: 1.25rem;
+            color: var(--accent-primary);
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 0.875rem 1rem 0.875rem 2.75rem;
-            border: 1.5px solid var(--border);
+            padding: 1.125rem 1.25rem 1.125rem 3.5rem;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
             border-radius: 12px;
-            font-size: 0.9375rem;
-            font-family: 'Outfit', sans-serif;
-            transition: all 0.2s ease;
-            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
         }
 
         input[type="text"]:focus {
             outline: none;
-            border-color: var(--accent);
-            background: var(--bg-secondary);
-            box-shadow: 0 0 0 3px var(--accent-light);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.1);
         }
 
         select {
-            padding: 0.875rem 1rem;
-            border: 1.5px solid var(--border);
+            padding: 1.125rem 1.5rem;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
             border-radius: 12px;
-            font-size: 0.9375rem;
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg-tertiary);
             color: var(--text-primary);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all 0.2s ease;
-            min-width: 160px;
+            transition: all 0.3s ease;
+            min-width: 180px;
         }
 
         select:hover {
-            border-color: var(--accent);
+            border-color: var(--accent-primary);
         }
 
         select:focus {
             outline: none;
-            border-color: var(--accent);
-            background: var(--bg-secondary);
-            box-shadow: 0 0 0 3px var(--accent-light);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.1);
         }
 
-        /* Stats bar */
+        /* Stats Bar */
         .stats-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
+            margin-bottom: 3rem;
+            padding: 1.5rem 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
         }
 
-        .results-count {
-            font-size: 0.875rem;
+        .showing-text {
+            font-size: 1rem;
             color: var(--text-secondary);
         }
 
-        .results-count strong {
-            color: var(--text-primary);
-            font-weight: 600;
+        .showing-number {
+            color: var(--accent-primary);
+            font-weight: 700;
+            font-size: 1.25rem;
         }
 
-        .savings {
+        .total-savings {
+            text-align: right;
+        }
+
+        .savings-label {
             font-size: 0.875rem;
-            color: var(--text-secondary);
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .savings-amount {
-            color: #059669;
-            font-weight: 700;
-            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: countUp 2s ease-out;
         }
 
-        /* Grid */
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Domain Grid */
         .domain-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 5rem;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-bottom: 6rem;
         }
 
-        /* Card */
+        /* Domain Card */
         .domain-card {
-            background: var(--bg-secondary);
+            background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.75rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
 
-        .domain-card::before {
+        .domain-card::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 2px;
-            background: var(--gradient);
+            height: 3px;
+            background: var(--gradient-primary);
             transform: scaleX(0);
-            transition: transform 0.3s ease;
+            transform-origin: left;
+            transition: transform 0.4s ease;
         }
 
         .domain-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--accent);
+            transform: translateY(-8px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 25px 50px rgba(0, 217, 255, 0.15);
         }
 
-        .domain-card:hover::before {
+        .domain-card:hover::after {
             transform: scaleX(1);
         }
 
-        .domain-header {
+        .card-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
 
         .domain-name {
-            font-family: 'Epilogue', sans-serif;
-            font-size: 1.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.75rem;
             font-weight: 800;
-            letter-spacing: -0.01em;
             color: var(--text-primary);
             word-break: break-word;
             line-height: 1.2;
+            letter-spacing: -0.02em;
         }
 
-        .discount-pill {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        .badges {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: flex-end;
+        }
+
+        .discount-badge {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
             color: white;
-            padding: 0.25rem 0.75rem;
+            padding: 0.375rem 0.875rem;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 700;
             white-space: nowrap;
+            animation: gentlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.02); opacity: 0.95; }
         }
 
         .domain-description {
             color: var(--text-secondary);
-            font-size: 0.9375rem;
-            margin-bottom: 1rem;
+            font-size: 0.95rem;
             line-height: 1.6;
+            margin-bottom: 1.25rem;
         }
 
         .market-insight {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border-left: 3px solid var(--accent);
-            padding: 0.875rem 1rem;
-            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
+            border-left: 3px solid var(--accent-primary);
+            padding: 1rem 1.25rem;
+            border-radius: 10px;
             margin-bottom: 1.5rem;
         }
 
         .insight-label {
-            font-size: 0.6875rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--accent);
+            letter-spacing: 1px;
+            color: var(--accent-primary);
             font-weight: 700;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .insight-text {
-            font-size: 0.875rem;
+            font-size: 0.9rem;
             color: var(--text-secondary);
             line-height: 1.5;
         }
 
-        .pricing {
+        .pricing-section {
             display: flex;
             align-items: baseline;
-            gap: 0.75rem;
-            margin-bottom: 1.25rem;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .price-original {
-            font-size: 1rem;
+            font-size: 1.125rem;
             color: var(--text-muted);
             text-decoration: line-through;
         }
 
         .price-current {
-            font-family: 'Epilogue', sans-serif;
-            font-size: 2rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 2.5rem;
             font-weight: 900;
-            color: var(--text-primary);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             letter-spacing: -0.02em;
         }
 
         .cta-buttons {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.75rem;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 0.875rem;
         }
 
         .btn {
-            padding: 0.875rem 1.5rem;
-            border-radius: 10px;
-            font-size: 0.9375rem;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
             font-weight: 600;
             text-decoration: none;
             text-align: center;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary {
-            background: var(--accent);
-            color: white;
+            background: var(--gradient-primary);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
         }
 
         .btn-primary:hover {
-            background: var(--accent-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 217, 255, 0.4);
         }
 
         .btn-secondary {
-            background: var(--bg-tertiary);
+            background: transparent;
             color: var(--text-primary);
-            border: 1.5px solid var(--border);
+            border: 2px solid var(--border);
         }
 
         .btn-secondary:hover {
-            background: var(--bg-secondary);
-            border-color: var(--accent);
+            border-color: var(--accent-primary);
+            background: rgba(0, 217, 255, 0.1);
         }
 
-        /* No results */
+        /* No Results */
         .no-results {
             text-align: center;
-            padding: 5rem 2rem;
-            color: var(--text-secondary);
+            padding: 6rem 2rem;
         }
 
         .no-results-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.3;
+        }
+
+        .no-results-text {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 3rem 0;
-            color: var(--text-muted);
-            font-size: 0.875rem;
+            padding: 4rem 2rem;
+            margin-top: 6rem;
             border-top: 1px solid var(--border);
-            margin-top: 5rem;
+            position: relative;
+            z-index: 1;
         }
 
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .domain-card {
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .domain-card:nth-child(1) { animation-delay: 0.1s; }
+        .domain-card:nth-child(2) { animation-delay: 0.15s; }
+        .domain-card:nth-child(3) { animation-delay: 0.2s; }
+        .domain-card:nth-child(4) { animation-delay: 0.25s; }
+        .domain-card:nth-child(5) { animation-delay: 0.3s; }
+        .domain-card:nth-child(6) { animation-delay: 0.35s; }
+
         /* Responsive */
+        @media (max-width: 1024px) {
+            .header-stats {
+                gap: 2rem;
+            }
+        }
+
         @media (max-width: 768px) {
-            .container {
-                padding: 0 1.25rem;
+            .header-container {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .header-stats {
+                width: 100%;
+                justify-content: space-around;
             }
 
             h1 {
                 font-size: 2.5rem;
             }
 
-            .header-stats {
-                width: 100%;
-                justify-content: space-between;
+            .value-props {
+                grid-template-columns: 1fr;
             }
 
             .filters {
@@ -441,64 +850,93 @@
 
             .stats-bar {
                 flex-direction: column;
-                gap: 0.5rem;
-                align-items: flex-start;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .total-savings {
+                text-align: center;
+            }
+
+            .cta-buttons {
+                grid-template-columns: 1fr;
             }
         }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .domain-card {
-            animation: fadeInUp 0.5s ease-out backwards;
-        }
-
-        .domain-card:nth-child(1) { animation-delay: 0.05s; }
-        .domain-card:nth-child(2) { animation-delay: 0.1s; }
-        .domain-card:nth-child(3) { animation-delay: 0.15s; }
-        .domain-card:nth-child(4) { animation-delay: 0.2s; }
-        .domain-card:nth-child(5) { animation-delay: 0.25s; }
-        .domain-card:nth-child(6) { animation-delay: 0.3s; }
     </style>
 </head>
 <body>
+    <div class="bg-animated"></div>
+
     <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">DomainMart</div>
-                <div class="header-stats">
-                    <div class="stat">
-                        <span class="stat-value" id="headerCount">23</span>
-                        <span class="stat-label">Domains</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-value">$888</span>
-                        <span class="stat-label">Fixed Price</span>
-                    </div>
+        <div class="header-container">
+            <div class="logo">DOMAINART</div>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="headerCount">23</span>
+                    <span class="stat-label">Premium Domains</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">$888</span>
+                    <span class="stat-label">Fixed Price</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="avgDiscount">68%</span>
+                    <span class="stat-label">Avg. Savings</span>
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="container">
-        <section class="hero">
-            <h1>Premium Domains</h1>
-            <p class="subtitle">Own tomorrow's brands today — exclusive domains at breakthrough prices</p>
-        </section>
+    <section class="hero">
+        <div class="grid-pattern"></div>
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="geometric-shapes">
+            <div class="shape circle"></div>
+            <div class="shape square"></div>
+            <div class="shape circle"></div>
+            <div class="shape square"></div>
+            <div class="shape triangle"></div>
+            <div class="shape circle"></div>
+        </div>
+        <h1>Premium Domains</h1>
+        <p class="subtitle">Own tomorrow's brands today — exclusive domains at breakthrough prices</p>
+    </section>
 
+    <div class="value-props">
+        <div class="value-card">
+            <span class="value-icon">🎯</span>
+            <div class="value-title">Fixed $888</div>
+            <div class="value-desc">All premium domains at one simple price. No negotiation, no hidden fees.</div>
+        </div>
+        <div class="value-card">
+            <span class="value-icon">⚡</span>
+            <div class="value-title">Instant Transfer</div>
+            <div class="value-desc">Fast and secure domain transfer. Start building your brand immediately.</div>
+        </div>
+        <div class="value-card">
+            <span class="value-icon">💎</span>
+            <div class="value-title">Verified Quality</div>
+            <div class="value-desc">Hand-picked domains with strong branding potential and market value.</div>
+        </div>
+        <div class="value-card">
+            <span class="value-icon">📈</span>
+            <div class="value-title">Growth Ready</div>
+            <div class="value-desc">Domains positioned in high-growth industries and emerging technologies.</div>
+        </div>
+    </div>
+
+    <div class="container">
         <div class="filters">
             <div class="search-wrapper">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Search domains (e.g., crypto, tech, ai...)">
+                <input type="text" id="searchInput" placeholder="Search domains (crypto, AI, tech...)">
             </div>
             <select id="sortSelect">
                 <option value="name-asc">Name A-Z</option>
@@ -509,22 +947,27 @@
         </div>
 
         <div class="stats-bar">
-            <div class="results-count">
-                Showing <strong id="showingCount">23</strong> domains
+            <div>
+                <span class="showing-text">Showing <span class="showing-number" id="showingCount">23</span> domains</span>
             </div>
-            <div class="savings">
-                Total savings: <span class="savings-amount" id="totalSavings">$0</span>
+            <div class="total-savings">
+                <div class="savings-label">Total You Save</div>
+                <div class="savings-amount" id="totalSavings">$0</div>
             </div>
         </div>
 
         <div class="domain-grid" id="domainGrid">
-            <!-- Domain cards will be inserted here -->
+            <!-- Domains will be inserted here -->
         </div>
     </div>
 
     <footer>
-        <div class="container">
-            © 2024 Premium Domain Marketplace. All domains listed are available for purchase.
+        <div class="footer-content">
+            <div class="footer-logo">DOMAINART</div>
+            <p class="footer-text">
+                Premium domain marketplace offering hand-selected domains at breakthrough prices. 
+                All domains verified, transfer-ready, and positioned for growth. Secure your digital identity today.
+            </p>
         </div>
     </footer>
 
@@ -572,21 +1015,21 @@
 
         function createDomainCard(domain) {
             const discount = calculateDiscount(domain.originalPrice, domain.discountPrice);
-            const marketInsightHTML = domain.marketInsight ? `
-                <div class="market-insight">
-                    <div class="insight-label">📊 Market Opportunity</div>
-                    <div class="insight-text">${domain.marketInsight}</div>
-                </div>` : '';
             
             return `
                 <div class="domain-card">
-                    <div class="domain-header">
+                    <div class="card-header">
                         <div class="domain-name">${domain.name}</div>
-                        <div class="discount-pill">-${discount}%</div>
+                        <div class="badges">
+                            <div class="discount-badge">-${discount}%</div>
+                        </div>
                     </div>
                     <div class="domain-description">${domain.description}</div>
-                    ${marketInsightHTML}
-                    <div class="pricing">
+                    <div class="market-insight">
+                        <div class="insight-label">📊 MARKET OPPORTUNITY</div>
+                        <div class="insight-text">${domain.marketInsight}</div>
+                    </div>
+                    <div class="pricing-section">
                         <span class="price-original">${formatPrice(domain.originalPrice)}</span>
                         <span class="price-current">${formatPrice(domain.discountPrice)}</span>
                     </div>
@@ -605,7 +1048,7 @@
                 grid.innerHTML = `
                     <div class="no-results">
                         <div class="no-results-icon">🔍</div>
-                        <p>No domains match your search criteria</p>
+                        <p class="no-results-text">No domains match your search</p>
                     </div>
                 `;
             } else {
@@ -624,6 +1067,14 @@
             }, 0);
             
             document.getElementById('totalSavings').textContent = formatPrice(totalSavings);
+
+            // Calculate average discount
+            const avgDiscount = Math.round(
+                filteredDomains.reduce((sum, domain) => {
+                    return sum + calculateDiscount(domain.originalPrice, domain.discountPrice);
+                }, 0) / filteredDomains.length
+            );
+            document.getElementById('avgDiscount').textContent = avgDiscount + '%';
         }
 
         function filterDomains() {
@@ -651,8 +1102,7 @@
                         const discountB = calculateDiscount(b.originalPrice, b.discountPrice);
                         return discountB - discountA;
                     case 'newest':
-                        // Newest = reverse order (assumes domains array is in order added)
-                        return 0; // Keep original order for "newest"
+                        return 0;
                     default:
                         return 0;
                 }
