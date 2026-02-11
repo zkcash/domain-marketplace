@@ -13,18 +13,20 @@
         }
 
         :root {
-            --bg-primary: #0F172A;
-            --bg-secondary: #1E293B;
-            --bg-card: #1E293B;
-            --text-primary: #F8FAFC;
-            --text-secondary: #CBD5E1;
-            --text-muted: #64748B;
-            --accent-primary: #10B981;
-            --accent-secondary: #F59E0B;
-            --accent-success: #22C55E;
-            --border: #334155;
-            --gradient-primary: linear-gradient(135deg, #10B981 0%, #F59E0B 100%);
-            --gradient-accent: linear-gradient(135deg, #22C55E 0%, #10B981 100%);
+            --bg-primary: #FAFBFC;
+            --bg-secondary: #F5F6F8;
+            --bg-card: #FFFFFF;
+            --text-primary: #1A1F36;
+            --text-secondary: #4B5563;
+            --text-muted: #6B7280;
+            --accent-primary: #FF6B35;
+            --accent-secondary: #F7931E;
+            --accent-blue: #3B5998;
+            --accent-success: #10B981;
+            --border: #E5E7EB;
+            --gradient-primary: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+            --gradient-secondary: linear-gradient(135deg, #3B5998 0%, #5B7CB8 100%);
+            --gradient-warm: linear-gradient(135deg, #FFB88C 0%, #FF8C5A 100%);
         }
 
         body {
@@ -35,7 +37,7 @@
             overflow-x: hidden;
         }
 
-        /* Animated background */
+        /* Animated background - Warm Sunset with Gradient Drift */
         .bg-animated {
             position: fixed;
             top: 0;
@@ -43,16 +45,50 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.04;
-            background-image: 
-                radial-gradient(circle at 20% 50%, var(--accent-primary) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, var(--accent-secondary) 0%, transparent 50%);
-            animation: bgFloat 20s ease-in-out infinite;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(255, 107, 53, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(247, 147, 30, 0.08) 0%, transparent 50%),
+                linear-gradient(135deg, #FAFBFC 0%, #F5F6F8 50%, #FAFBFC 100%);
+            background-size: 200% 200%;
+            animation: gradientDrift 20s ease infinite;
         }
 
-        @keyframes bgFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(50px, 50px) scale(1.1); }
+        /* Soft Noise Texture Overlay */
+        .bg-animated::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            opacity: 0.5;
+            animation: noiseShift 8s steps(10) infinite;
+        }
+
+        @keyframes gradientDrift {
+            0% { 
+                background-position: 0% 0%;
+            }
+            50% { 
+                background-position: 100% 100%;
+            }
+            100% { 
+                background-position: 0% 0%;
+            }
+        }
+
+        @keyframes noiseShift {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-5%, -5%); }
+            20% { transform: translate(-10%, 5%); }
+            30% { transform: translate(5%, -10%); }
+            40% { transform: translate(-5%, 10%); }
+            50% { transform: translate(10%, -5%); }
+            60% { transform: translate(-10%, -10%); }
+            70% { transform: translate(10%, 10%); }
+            80% { transform: translate(5%, -5%); }
+            90% { transform: translate(-5%, 5%); }
         }
 
         /* Header */
@@ -60,9 +96,10 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(10, 10, 15, 0.8);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
+            box-shadow: 0 2px 12px rgba(255, 107, 53, 0.06);
         }
 
         .header-container {
@@ -82,8 +119,12 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -0.5px;
-            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
         }
 
         .header-stats {
@@ -123,26 +164,33 @@
             overflow: hidden;
         }
 
-        /* Geometric Background Animation */
+        /* Geometric Background Animation - Sunset Radiance */
         .hero::before {
             content: '';
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 800px;
-            height: 800px;
+            width: 1000px;
+            height: 1000px;
             background: 
-                radial-gradient(circle at 30% 40%, rgba(0, 217, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 70% 60%, rgba(124, 58, 237, 0.08) 0%, transparent 50%);
+                radial-gradient(circle at 40% 40%, rgba(255, 107, 53, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 60% 60%, rgba(247, 147, 30, 0.08) 0%, transparent 60%);
             border-radius: 50%;
-            animation: heroGlow 8s ease-in-out infinite;
+            animation: sunsetRadiate 10s ease-in-out infinite;
             z-index: -1;
+            filter: blur(60px);
         }
 
-        @keyframes heroGlow {
-            0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 0.6; }
-            50% { transform: translate(-50%, -50%) scale(1.1) rotate(180deg); opacity: 0.8; }
+        @keyframes sunsetRadiate {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.15);
+                opacity: 1;
+            }
         }
 
         .geometric-shapes {
@@ -157,18 +205,25 @@
 
         .shape {
             position: absolute;
-            opacity: 0.06;
+            opacity: 0.12;
             animation: float 20s infinite ease-in-out;
+            filter: blur(1px);
         }
 
         .shape.circle {
-            border: 2px solid var(--accent-primary);
+            border: 2px solid rgba(255, 107, 53, 0.4);
             border-radius: 50%;
+            box-shadow: 
+                0 0 20px rgba(255, 107, 53, 0.2),
+                inset 0 0 15px rgba(255, 107, 53, 0.1);
         }
 
         .shape.square {
-            border: 2px solid var(--accent-secondary);
+            border: 2px solid rgba(247, 147, 30, 0.4);
             transform: rotate(45deg);
+            box-shadow: 
+                0 0 20px rgba(247, 147, 30, 0.2),
+                inset 0 0 15px rgba(247, 147, 30, 0.1);
         }
 
         .shape.triangle {
@@ -176,8 +231,9 @@
             height: 0;
             border-left: 50px solid transparent;
             border-right: 50px solid transparent;
-            border-bottom: 87px solid var(--accent-primary);
-            opacity: 0.04;
+            border-bottom: 87px solid rgba(255, 140, 90, 0.2);
+            opacity: 0.08;
+            filter: drop-shadow(0 0 10px rgba(255, 140, 90, 0.3));
         }
 
         .shape:nth-child(1) {
@@ -247,7 +303,7 @@
             }
         }
 
-        /* Grid Pattern Background */
+        /* Grid Pattern Background - Warm Subtle */
         .grid-pattern {
             position: absolute;
             top: 0;
@@ -255,19 +311,55 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
+                linear-gradient(rgba(255, 107, 53, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 107, 53, 0.03) 1px, transparent 1px);
+            background-size: 100px 100px;
             z-index: -2;
-            animation: gridMove 20s linear infinite;
+            animation: warmDrift 35s linear infinite;
+            opacity: 0.4;
         }
 
-        @keyframes gridMove {
+        @keyframes warmDrift {
             0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+            100% { transform: translate(100px, 100px); }
         }
 
-        /* Particles Network */
+        /* Breathing Grid Lines - Enterprise Tech Feel */
+        .breathing-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .breathing-grid::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, rgba(255, 107, 53, 0.12) 0px, transparent 1px, transparent 60px, rgba(255, 107, 53, 0.12) 61px),
+                repeating-linear-gradient(90deg, rgba(255, 107, 53, 0.12) 0px, transparent 1px, transparent 60px, rgba(255, 107, 53, 0.12) 61px);
+            animation: breathingGrid 8s ease-in-out infinite;
+        }
+
+        @keyframes breathingGrid {
+            0%, 100% { 
+                opacity: 0.4;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.8;
+                transform: scale(1.02);
+            }
+        }
+
+        /* Floating Energy Orbs */
         .particles {
             position: absolute;
             top: 0;
@@ -280,44 +372,55 @@
 
         .particle {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--accent-primary);
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.6) 0%, rgba(247, 147, 30, 0.3) 50%, transparent 70%);
             border-radius: 50%;
-            opacity: 0.4;
-            box-shadow: 0 0 10px var(--accent-primary);
+            opacity: 0.7;
+            filter: blur(2px);
+            animation: energyFloat 14s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
         }
 
         .particle::after {
             content: '';
             position: absolute;
-            width: 2px;
-            height: 60px;
-            background: linear-gradient(to bottom, var(--accent-primary), transparent);
-            top: 0;
-            left: 1px;
-            opacity: 0.3;
-            animation: particleLine 3s ease-in-out infinite;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, rgba(255, 140, 90, 0.25) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -9px;
+            left: -9px;
+            filter: blur(5px);
         }
 
-        @keyframes particleLine {
-            0%, 100% { transform: scaleY(0); opacity: 0; }
-            50% { transform: scaleY(1); opacity: 0.3; }
+        @keyframes energyFloat {
+            0% { 
+                transform: translate(0, 0) scale(1);
+                opacity: 0.3;
+            }
+            25% {
+                opacity: 0.5;
+            }
+            50% { 
+                transform: translate(40px, -30px) scale(1.3);
+                opacity: 0.6;
+            }
+            75% {
+                opacity: 0.4;
+            }
+            100% { 
+                transform: translate(-30px, 25px) scale(0.9);
+                opacity: 0.3;
+            }
         }
 
-        .particle:nth-child(1) { top: 15%; left: 20%; animation: particleFloat 8s infinite; animation-delay: 0s; }
-        .particle:nth-child(2) { top: 45%; left: 60%; animation: particleFloat 10s infinite; animation-delay: 1s; }
-        .particle:nth-child(3) { top: 75%; left: 30%; animation: particleFloat 12s infinite; animation-delay: 2s; }
-        .particle:nth-child(4) { top: 25%; left: 80%; animation: particleFloat 9s infinite; animation-delay: 1.5s; }
-        .particle:nth-child(5) { top: 65%; left: 70%; animation: particleFloat 11s infinite; animation-delay: 0.5s; }
-        .particle:nth-child(6) { top: 35%; left: 15%; animation: particleFloat 10s infinite; animation-delay: 2.5s; }
-
-        @keyframes particleFloat {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(20px, -20px); }
-            50% { transform: translate(-15px, 15px); }
-            75% { transform: translate(15px, 20px); }
-        }
+        .particle:nth-child(1) { top: 25%; left: 20%; animation-delay: 0s; animation-duration: 16s; }
+        .particle:nth-child(2) { top: 45%; left: 70%; animation-delay: 3s; animation-duration: 18s; }
+        .particle:nth-child(3) { top: 65%; left: 30%; animation-delay: 6s; animation-duration: 15s; }
+        .particle:nth-child(4) { top: 35%; left: 85%; animation-delay: 2s; animation-duration: 20s; }
+        .particle:nth-child(5) { top: 75%; left: 55%; animation-delay: 8s; animation-duration: 17s; }
+        .particle:nth-child(6) { top: 55%; left: 15%; animation-delay: 4s; animation-duration: 19s; }
 
         h1 {
             font-family: 'Inter', sans-serif;
@@ -326,15 +429,15 @@
             line-height: 1.1;
             margin-bottom: 1.5rem;
             letter-spacing: -0.03em;
-            background: linear-gradient(135deg, #ffffff 0%, #00d9ff 50%, #7c3aed 100%);
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFB88C 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: shimmer 3s ease-in-out infinite;
+            animation: warmShimmer 4s ease-in-out infinite;
             background-size: 200% auto;
         }
 
-        @keyframes shimmer {
+        @keyframes warmShimmer {
             0%, 100% { background-position: 0% center; }
             50% { background-position: 100% center; }
         }
@@ -344,8 +447,9 @@
             color: var(--text-secondary);
             max-width: 700px;
             margin: 0 auto 3rem;
-            font-weight: 300;
-            letter-spacing: 0.5px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            line-height: 1.6;
         }
 
         /* Value Proposition Cards */
@@ -361,7 +465,7 @@
         }
 
         .value-card {
-            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 2rem;
@@ -369,6 +473,7 @@
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 2px 12px rgba(255, 107, 53, 0.06);
         }
 
         .value-card::before {
@@ -378,8 +483,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.1), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.08), transparent);
+            transition: left 0.6s;
         }
 
         .value-card:hover::before {
@@ -389,7 +494,9 @@
         .value-card:hover {
             transform: translateY(-8px);
             border-color: var(--accent-primary);
-            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2);
+            box-shadow: 
+                0 20px 40px rgba(255, 107, 53, 0.15),
+                0 0 0 1px rgba(255, 107, 53, 0.1);
         }
 
         .value-icon {
@@ -491,7 +598,7 @@
         /* Stats Bar */
         .stats-bar {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             margin-bottom: 3rem;
             padding: 1.5rem 2rem;
@@ -501,41 +608,15 @@
         }
 
         .showing-text {
-            font-size: 1rem;
+            font-size: 1.125rem;
             color: var(--text-secondary);
+            font-weight: 500;
         }
 
         .showing-number {
             color: var(--accent-primary);
-            font-weight: 700;
-            font-size: 1.25rem;
-        }
-
-        .total-savings {
-            text-align: right;
-        }
-
-        .savings-label {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .savings-amount {
-            font-family: 'Inter', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: countUp 2s ease-out;
-        }
-
-        @keyframes countUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            font-weight: 800;
+            font-size: 1.5rem;
         }
 
         /* Domain Grid */
@@ -573,7 +654,168 @@
         .domain-card:hover {
             transform: translateY(-8px);
             border-color: var(--accent-primary);
-            box-shadow: 0 25px 50px rgba(0, 217, 255, 0.15);
+            box-shadow: 
+                0 25px 50px rgba(255, 107, 53, 0.12),
+                0 0 0 1px rgba(255, 107, 53, 0.08);
+        }
+
+        .domain-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.25rem;
+        }
+
+        .domain-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            word-break: break-word;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .badges {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: flex-end;
+        }
+
+        .discount-badge {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            padding: 0.375rem 0.875rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            white-space: nowrap;
+            animation: gentlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.02); opacity: 0.95; }
+        }
+
+        .domain-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+        }
+
+        .market-insight {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.06) 0%, rgba(247, 147, 30, 0.04) 100%);
+            border-left: 3px solid var(--accent-primary);
+            padding: 1rem 1.25rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .insight-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-primary);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .insight-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .pricing-section {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-original {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .price-current {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-buttons {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 0.875rem;
+        }
+
+        .btn {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.35);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            background: rgba(255, 107, 53, 0.05);
+            color: var(--accent-primary);
         }
 
         .domain-card:hover::after {
@@ -720,7 +962,7 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 217, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(93, 122, 153, 0.25);
         }
 
         .btn-secondary {
@@ -731,7 +973,8 @@
 
         .btn-secondary:hover {
             border-color: var(--accent-primary);
-            background: rgba(0, 217, 255, 0.1);
+            background: rgba(93, 122, 153, 0.06);
+            color: var(--accent-primary);
         }
 
         /* No Results */
@@ -774,9 +1017,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -0.02em;
             margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
         }
 
         .footer-text {
@@ -869,10 +1111,10 @@
 
     <header>
         <div class="header-container">
-            <div class="logo">FIXEDNAMES</div>
+            <div class="logo">FixedNames</div>
             <div class="header-stats">
                 <div class="stat-item">
-                    <span class="stat-value" id="headerCount">22</span>
+                    <span class="stat-value" id="headerCount">27</span>
                     <span class="stat-label">Premium Domains</span>
                 </div>
                 <div class="stat-item">
@@ -889,6 +1131,7 @@
 
     <section class="hero">
         <div class="grid-pattern"></div>
+        <div class="breathing-grid"></div>
         <div class="particles">
             <div class="particle"></div>
             <div class="particle"></div>
@@ -906,7 +1149,7 @@
             <div class="shape circle"></div>
         </div>
         <h1>Premium Domains</h1>
-        <p class="subtitle">Every domain, one fixed price — $888. No negotiation, simple choice.</p>
+        <p class="subtitle">Stop overthinking. Start building. Every great domain is $888.</p>
     </section>
 
     <div class="value-props">
@@ -947,13 +1190,7 @@
         </div>
 
         <div class="stats-bar">
-            <div>
-                <span class="showing-text">Showing <span class="showing-number" id="showingCount">22</span> domains</span>
-            </div>
-            <div class="total-savings">
-                <div class="savings-label">Total You Save</div>
-                <div class="savings-amount" id="totalSavings">$0</div>
-            </div>
+            <span class="showing-text">Showing <span class="showing-number" id="showingCount">27</span> domains</span>
         </div>
 
         <div class="domain-grid" id="domainGrid">
@@ -963,7 +1200,7 @@
 
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">FIXEDNAMES</div>
+            <div class="footer-logo">FixedNames</div>
             <p class="footer-text">
                 FixedNames offers premium domains at one transparent price: $888. 
                 Every domain is hand-selected, verified, and ready for immediate transfer. 
@@ -995,7 +1232,12 @@
             { name: "Freightian.com", description: "Freight logistics platforms, shipping optimization, or freight forwarding marketplace", marketInsight: "Uber Freight, Flexport digitizing $800B logistics industry - legacy companies struggling", originalPrice: 2111, discountPrice: 888, spaceshipLink: "https://freightian.com", godaddyLink: "https://www.godaddy.com/forsale/freightian.com" },
             { name: "AgentEconomic.com", description: "AI agent marketplaces, autonomous economic agents, or multi-agent economy platforms", marketInsight: "OpenAI's GPT Store launched with 3M+ custom agents - agent economy emerging rapidly", originalPrice: 2888, discountPrice: 888, spaceshipLink: "https://agenteconomic.com", godaddyLink: "https://www.godaddy.com/forsale/agenteconomic.com" },
             { name: "HumancareAI.com", description: "AI-powered healthcare, patient care automation, or human-centric medical AI solutions", marketInsight: "FDA approved first AI diagnostic tools 2023 - hospitals deploying AI for patient care", originalPrice: 1399, discountPrice: 888, spaceshipLink: "https://humancareai.com", godaddyLink: "https://www.godaddy.com/forsale/humancareai.com" },
-            { name: "AIAGIDev.com", description: "AGI development platforms, AI-to-AGI transition tools, or advanced artificial general intelligence solutions", marketInsight: "Sam Altman: AGI by 2027 possible - developers building tools for AGI era today", originalPrice: 1499, discountPrice: 888, spaceshipLink: "https://aiagidev.com", godaddyLink: "https://www.godaddy.com/forsale/aiagidev.com" }
+            { name: "AIAGIDev.com", description: "AGI development platforms, AI-to-AGI transition tools, or advanced artificial general intelligence solutions", marketInsight: "Sam Altman: AGI by 2027 possible - developers building tools for AGI era today", originalPrice: 1499, discountPrice: 888, spaceshipLink: "https://aiagidev.com", godaddyLink: "https://www.godaddy.com/forsale/aiagidev.com" },
+            { name: "ElectricCarRide.com", description: "EV ride-sharing, electric vehicle rental platforms, or sustainable transportation services", marketInsight: "Uber commits to 100% EVs by 2030, Lyft adding 50K EVs - green ride-sharing booming", originalPrice: 2388, discountPrice: 888, spaceshipLink: "https://electriccarride.com", godaddyLink: "https://www.godaddy.com/forsale/electriccarride.com" },
+            { name: "EditSpeech.com", description: "AI speech editing tools, podcast editing platforms, or audio content optimization services", marketInsight: "Descript raised $50M for AI speech editing - 464M podcasts globally need editing tools", originalPrice: 1988, discountPrice: 888, spaceshipLink: "https://editspeech.com", godaddyLink: "https://www.godaddy.com/forsale/editspeech.com" },
+            { name: "Yuancex.com", description: "Chinese Yuan cryptocurrency exchange, CNY-crypto trading platform, or Asian digital asset marketplace", marketInsight: "China's digital Yuan pilot reaches 260M+ wallets - crypto-Yuan bridge opportunity emerging", originalPrice: 1988, discountPrice: 888, spaceshipLink: "https://yuancex.com", godaddyLink: "https://www.godaddy.com/forsale/yuancex.com" },
+            { name: "SpatialGPU.com", description: "Spatial computing GPU solutions, VR/AR rendering hardware, or metaverse graphics acceleration", marketInsight: "NVIDIA's spatial computing GPUs sold out instantly - Apple Vision Pro driving demand surge", originalPrice: 1988, discountPrice: 888, spaceshipLink: "https://spatialgpu.com", godaddyLink: "https://www.godaddy.com/forsale/spatialgpu.com" },
+            { name: "WorkedAI.com", description: "AI workforce analytics, employee productivity AI, or automated work tracking platforms", marketInsight: "Microsoft Copilot users report 29% productivity gain - enterprises deploying AI work tools", originalPrice: 2199, discountPrice: 888, spaceshipLink: "https://workedai.com", godaddyLink: "https://www.godaddy.com/forsale/workedai.com" }
         ];
 
         let filteredDomains = [...domains];
@@ -1061,12 +1303,6 @@
         function updateStats() {
             document.getElementById('showingCount').textContent = filteredDomains.length;
             document.getElementById('headerCount').textContent = filteredDomains.length;
-            
-            const totalSavings = filteredDomains.reduce((sum, domain) => {
-                return sum + (domain.originalPrice - domain.discountPrice);
-            }, 0);
-            
-            document.getElementById('totalSavings').textContent = formatPrice(totalSavings);
 
             // Calculate average discount
             const avgDiscount = Math.round(
@@ -1124,4 +1360,5 @@
     </script>
 </body>
 </html>
+
 
