@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Domain Marketplace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #fafafa;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f5f5f5;
+            --text-primary: #0a0a0a;
+            --text-secondary: #525252;
+            --text-muted: #a3a3a3;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-light: #dbeafe;
+            --border: #e5e5e5;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.05);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .logo {
+            font-family: 'Epilogue', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.875rem;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-family: 'Epilogue', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Epilogue', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #525252 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 400;
+        }
+
+        /* Filters */
+        .filters {
+            background: var(--bg-secondary);
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 3rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            flex: 1;
+            min-width: 280px;
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.125rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.875rem 1rem 0.875rem 2.75rem;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            font-size: 0.9375rem;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.2s ease;
+            background: var(--bg-tertiary);
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: var(--bg-secondary);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        select {
+            padding: 0.875rem 1rem;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            font-size: 0.9375rem;
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 160px;
+        }
+
+        select:hover {
+            border-color: var(--accent);
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: var(--bg-secondary);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        /* Stats bar */
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .results-count {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .results-count strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .savings {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .savings-amount {
+            color: #059669;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Grid */
+        .domain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        /* Card */
+        .domain-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .domain-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .domain-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+
+        .domain-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .domain-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .domain-name {
+            font-family: 'Epilogue', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            word-break: break-word;
+            line-height: 1.2;
+        }
+
+        .discount-pill {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .domain-description {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .market-insight {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 3px solid var(--accent);
+            padding: 0.875rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .insight-label {
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .insight-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .pricing {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .price-original {
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .price-current {
+            font-family: 'Epilogue', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .cta-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            padding: 0.875rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1.5px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            border-color: var(--accent);
+        }
+
+        /* No results */
+        .no-results {
+            text-align: center;
+            padding: 5rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .no-results-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border);
+            margin-top: 5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.25rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .header-stats {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            .search-wrapper,
+            select {
+                width: 100%;
+            }
+
+            .domain-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .domain-card {
+            animation: fadeInUp 0.5s ease-out backwards;
+        }
+
+        .domain-card:nth-child(1) { animation-delay: 0.05s; }
+        .domain-card:nth-child(2) { animation-delay: 0.1s; }
+        .domain-card:nth-child(3) { animation-delay: 0.15s; }
+        .domain-card:nth-child(4) { animation-delay: 0.2s; }
+        .domain-card:nth-child(5) { animation-delay: 0.25s; }
+        .domain-card:nth-child(6) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">DomainMart</div>
+                <div class="header-stats">
+                    <div class="stat">
+                        <span class="stat-value" id="headerCount">23</span>
+                        <span class="stat-label">Domains</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">$888</span>
+                        <span class="stat-label">Fixed Price</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Premium Domains</h1>
+            <p class="subtitle">Own tomorrow's brands today — exclusive domains at breakthrough prices</p>
+        </section>
+
+        <div class="filters">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Search domains (e.g., crypto, tech, ai...)">
+            </div>
+            <select id="sortSelect">
+                <option value="name-asc">Name A-Z</option>
+                <option value="name-desc">Name Z-A</option>
+                <option value="discount-desc">Biggest Discount</option>
+                <option value="newest">Newest First</option>
+            </select>
+        </div>
+
+        <div class="stats-bar">
+            <div class="results-count">
+                Showing <strong id="showingCount">23</strong> domains
+            </div>
+            <div class="savings">
+                Total savings: <span class="savings-amount" id="totalSavings">$0</span>
+            </div>
+        </div>
+
+        <div class="domain-grid" id="domainGrid">
+            <!-- Domain cards will be inserted here -->
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            © 2024 Premium Domain Marketplace. All domains listed are available for purchase.
+        </div>
+    </footer>
+
+    <script>
+        const domains = [
+            { name: "PayCoding.com", description: "Perfect domain for coding bootcamps, developer payment platforms, or freelance coding marketplaces", marketInsight: "Developer tools market valued at $9.3B globally, growing 22% annually", originalPrice: 2888, discountPrice: 888, spaceshipLink: "https://paycoding.com", godaddyLink: "https://www.godaddy.com/forsale/paycoding.com" },
+            { name: "BTCSpot.org", description: "Premium domain for Bitcoin trading platforms, crypto exchanges, or blockchain analytics", marketInsight: "Bitcoin spot trading volume exceeds $400B monthly with 300M+ users", originalPrice: 2499, discountPrice: 888, spaceshipLink: "https://btcspot.org", godaddyLink: "https://www.godaddy.com/forsale/btcspot.org" },
+            { name: "PolyFarming.com", description: "Dual-purpose domain: DeFi yield farming on Polygon network OR sustainable polyculture agriculture platform", marketInsight: "DeFi yield farming TVL at $45B+ | Sustainable agriculture market at $28B by 2030", originalPrice: 1500, discountPrice: 888, spaceshipLink: "https://polyfarming.com", godaddyLink: "https://www.godaddy.com/forsale/polyfarming.com" },
+            { name: "HardworkingAI.com", description: "Perfect for AI productivity tools, automation platforms, or AI-powered workforce solutions", marketInsight: "AI productivity tools market growing to $78B by 2028 (32% annual growth)", originalPrice: 1299, discountPrice: 888, spaceshipLink: "https://hardworkingai.com", godaddyLink: "https://www.godaddy.com/forsale/hardworkingai.com" },
+            { name: "TechCex.com", description: "Tech-focused cryptocurrency exchange or technology-driven trading platform", marketInsight: "Crypto exchange trading volume at $89T annually, tech integration key", originalPrice: 1500, discountPrice: 888, spaceshipLink: "https://techcex.com", godaddyLink: "https://www.godaddy.com/forsale/techcex.com" },
+            { name: "AutoHev.com", description: "Automotive HEV (Hybrid Electric Vehicle) marketplace or EV technology platform", marketInsight: "Hybrid EV market reaching $800B by 2030 with 14% annual growth", originalPrice: 1499, discountPrice: 888, spaceshipLink: "https://autohev.com", godaddyLink: "https://www.godaddy.com/forsale/autohev.com" },
+            { name: "VoiceSynthetic.com", description: "AI voice synthesis, text-to-speech platforms, or synthetic voice technology solutions", marketInsight: "AI voice synthesis market projected at $26.8B by 2032 (23% CAGR)", originalPrice: 1500, discountPrice: 888, spaceshipLink: "https://voicesynthetic.com", godaddyLink: "https://www.godaddy.com/forsale/voicesynthetic.com" },
+            { name: "BugsCheck.com", description: "Software testing, QA platforms, bug tracking systems, or code quality assurance tools", marketInsight: "Software testing market growing to $60B by 2027, bug detection crucial", originalPrice: 2111, discountPrice: 888, spaceshipLink: "https://bugscheck.com", godaddyLink: "https://www.godaddy.com/forsale/bugscheck.com" },
+            { name: "AIGetSet.com", description: "AI readiness platforms, AI onboarding tools, or AI implementation consulting services", marketInsight: "AI adoption consulting market at $12.4B, 85% companies planning AI integration", originalPrice: 1699, discountPrice: 888, spaceshipLink: "https://aigetset.com", godaddyLink: "https://www.godaddy.com/forsale/aigetset.com" },
+            { name: "AGIclick.com", description: "Artificial General Intelligence platforms, AGI development tools, or advanced AI solutions marketplace", marketInsight: "AGI development market expected to reach $500B+ as race to AGI intensifies", originalPrice: 1988, discountPrice: 888, spaceshipLink: "https://agiclick.com", godaddyLink: "https://www.godaddy.com/forsale/agiclick.com" },
+            { name: "GenAISecure.com", description: "Generative AI security platforms, AI safety tools, or secure AI deployment solutions", marketInsight: "AI security market growing to $38.2B by 2030 as GenAI adoption accelerates", originalPrice: 2399, discountPrice: 888, spaceshipLink: "https://genaisecure.com", godaddyLink: "https://www.godaddy.com/forsale/genaisecure.com" },
+            { name: "ETFstaking.com", description: "Cryptocurrency ETF staking platforms, digital asset staking services, or DeFi ETF solutions", marketInsight: "Crypto staking market at $20B TVL, spot Bitcoin ETFs exceeded $100B in assets", originalPrice: 2399, discountPrice: 888, spaceshipLink: "https://etfstaking.com", godaddyLink: "https://www.godaddy.com/forsale/etfstaking.com" },
+            { name: "JoblessAI.com", description: "AI-driven job displacement solutions, workforce automation platforms, or future-of-work consulting", marketInsight: "AI automation expected to impact 300M+ jobs globally, $15.7T economic impact by 2030", originalPrice: 3299, discountPrice: 888, spaceshipLink: "https://joblessai.com", godaddyLink: "https://www.godaddy.com/forsale/joblessai.com" },
+            { name: "InspectIntelligence.com", description: "AI-powered inspection systems, quality control automation, or intelligent monitoring platforms", marketInsight: "AI inspection market growing to $12.6B by 2030, manufacturing automation key trend", originalPrice: 1500, discountPrice: 888, spaceshipLink: "https://inspectintelligence.com", godaddyLink: "https://www.godaddy.com/forsale/inspectintelligence.com" },
+            { name: "TwinComputing.com", description: "Digital twin technology, parallel computing systems, or twin AI model development platforms", marketInsight: "Digital twin market projected at $155B by 2030 (58% CAGR), critical for Industry 4.0", originalPrice: 2888, discountPrice: 888, spaceshipLink: "https://twincomputing.com", godaddyLink: "https://www.godaddy.com/forsale/twincomputing.com" },
+            { name: "AlphaOrdinal.com", description: "Bitcoin Ordinals marketplace, NFT ordinals platform, or alpha trading signals for ordinals", marketInsight: "Bitcoin Ordinals volume exceeded $500M in 2024, creating new NFT ecosystem on Bitcoin", originalPrice: 2888, discountPrice: 888, spaceshipLink: "https://alphaordinal.com", godaddyLink: "https://www.godaddy.com/forsale/alphaordinal.com" },
+            { name: "Comsistent.com", description: "Brand consistency platforms, communications management, or consistent messaging automation tools", marketInsight: "Brand consistency software market at $8.2B, 73% companies prioritize unified branding", originalPrice: 2888, discountPrice: 888, spaceshipLink: "https://comsistent.com", godaddyLink: "https://www.godaddy.com/forsale/comsistent.com" },
+            { name: "Virtuxel.com", description: "Virtual pixel technology, VR/AR display solutions, or metaverse graphics rendering platforms", marketInsight: "Virtual display technology market reaching $50B by 2028, metaverse driving demand", originalPrice: 1988, discountPrice: 888, spaceshipLink: "https://virtuxel.com", godaddyLink: "https://www.godaddy.com/forsale/virtuxel.com" },
+            { name: "CareerPrimo.com", description: "Premium career services, executive job placement, or professional development platforms", marketInsight: "Career services market valued at $12.5B globally, executive coaching growing 15% annually", originalPrice: 2888, discountPrice: 888, spaceshipLink: "https://careerprimo.com", godaddyLink: "https://www.godaddy.com/forsale/careerprimo.com" },
+            { name: "Freightian.com", description: "Freight logistics platforms, shipping optimization, or freight forwarding marketplace", marketInsight: "Digital freight market projected at $84B by 2030, logistics tech transformation accelerating", originalPrice: 2111, discountPrice: 888, spaceshipLink: "https://freightian.com", godaddyLink: "https://www.godaddy.com/forsale/freightian.com" },
+            { name: "AgentEconomic.com", description: "AI agent marketplaces, autonomous economic agents, or multi-agent economy platforms", marketInsight: "AI agent economy projected to reach $28B by 2030, autonomous agents revolutionizing commerce", originalPrice: 2888, discountPrice: 888, spaceshipLink: "https://agenteconomic.com", godaddyLink: "https://www.godaddy.com/forsale/agenteconomic.com" },
+            { name: "HumancareAI.com", description: "AI-powered healthcare, patient care automation, or human-centric medical AI solutions", marketInsight: "AI healthcare market growing to $188B by 2030, patient care AI adoption accelerating", originalPrice: 1399, discountPrice: 888, spaceshipLink: "https://humancareai.com", godaddyLink: "https://www.godaddy.com/forsale/humancareai.com" },
+            { name: "AIAGIDev.com", description: "AGI development platforms, AI-to-AGI transition tools, or advanced artificial general intelligence solutions", marketInsight: "AGI development investments exceed $200B annually, race to AGI intensifying globally", originalPrice: 1499, discountPrice: 888, spaceshipLink: "https://aiagidev.com", godaddyLink: "https://www.godaddy.com/forsale/aiagidev.com" }
+        ];
+
+        let filteredDomains = [...domains];
+
+        function calculateDiscount(original, discount) {
+            return Math.round(((original - discount) / original) * 100);
+        }
+
+        function formatPrice(price) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(price);
+        }
+
+        function createDomainCard(domain) {
+            const discount = calculateDiscount(domain.originalPrice, domain.discountPrice);
+            const marketInsightHTML = domain.marketInsight ? `
+                <div class="market-insight">
+                    <div class="insight-label">📊 Market Opportunity</div>
+                    <div class="insight-text">${domain.marketInsight}</div>
+                </div>` : '';
+            
+            return `
+                <div class="domain-card">
+                    <div class="domain-header">
+                        <div class="domain-name">${domain.name}</div>
+                        <div class="discount-pill">-${discount}%</div>
+                    </div>
+                    <div class="domain-description">${domain.description}</div>
+                    ${marketInsightHTML}
+                    <div class="pricing">
+                        <span class="price-original">${formatPrice(domain.originalPrice)}</span>
+                        <span class="price-current">${formatPrice(domain.discountPrice)}</span>
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="${domain.spaceshipLink}" target="_blank" class="btn btn-primary">View on Spaceship</a>
+                        <a href="${domain.godaddyLink}" target="_blank" class="btn btn-secondary">GoDaddy</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderDomains() {
+            const grid = document.getElementById('domainGrid');
+            
+            if (filteredDomains.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">🔍</div>
+                        <p>No domains match your search criteria</p>
+                    </div>
+                `;
+            } else {
+                grid.innerHTML = filteredDomains.map(createDomainCard).join('');
+            }
+
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('showingCount').textContent = filteredDomains.length;
+            document.getElementById('headerCount').textContent = filteredDomains.length;
+            
+            const totalSavings = filteredDomains.reduce((sum, domain) => {
+                return sum + (domain.originalPrice - domain.discountPrice);
+            }, 0);
+            
+            document.getElementById('totalSavings').textContent = formatPrice(totalSavings);
+        }
+
+        function filterDomains() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            filteredDomains = domains.filter(domain => {
+                return domain.name.toLowerCase().includes(searchTerm) || 
+                       domain.description.toLowerCase().includes(searchTerm);
+            });
+            
+            sortDomains();
+        }
+
+        function sortDomains() {
+            const sortBy = document.getElementById('sortSelect').value;
+            
+            filteredDomains.sort((a, b) => {
+                switch(sortBy) {
+                    case 'name-asc':
+                        return a.name.localeCompare(b.name);
+                    case 'name-desc':
+                        return b.name.localeCompare(a.name);
+                    case 'discount-desc':
+                        const discountA = calculateDiscount(a.originalPrice, a.discountPrice);
+                        const discountB = calculateDiscount(b.originalPrice, b.discountPrice);
+                        return discountB - discountA;
+                    case 'newest':
+                        // Newest = reverse order (assumes domains array is in order added)
+                        return 0; // Keep original order for "newest"
+                    default:
+                        return 0;
+                }
+            });
+            
+            if (sortBy === 'newest') {
+                filteredDomains.reverse();
+            }
+            
+            renderDomains();
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', filterDomains);
+        document.getElementById('sortSelect').addEventListener('change', sortDomains);
+
+        // Initial render
+        renderDomains();
+    </script>
+</body>
+</html>
