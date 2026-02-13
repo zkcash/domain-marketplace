@@ -808,9 +808,15 @@
 
         .pricing-section {
             display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-main {
+            display: flex;
             align-items: baseline;
             gap: 1rem;
-            margin-bottom: 1.5rem;
         }
 
         .price-original {
@@ -828,6 +834,21 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: -0.02em;
+        }
+
+        .pricing-context {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .pricing-context-line {
+            margin-bottom: 0.25rem;
+        }
+
+        .pricing-highlight {
+            color: var(--text-secondary);
+            font-weight: 600;
         }
 
         .cta-buttons {
@@ -1328,6 +1349,11 @@
         function createDomainCard(domain) {
             const discount = calculateDiscount(domain.originalPrice, domain.discountPrice);
             
+            // Calculate market comp range
+            const compLow = Math.floor(domain.originalPrice * 0.8 / 1000) * 1000;
+            const compHigh = Math.ceil(domain.originalPrice * 1.2 / 1000) * 1000;
+            const compRange = `$${compLow/1000}k–$${compHigh/1000}k`;
+            
             return `
                 <div class="domain-card">
                     <div class="card-header">
@@ -1342,12 +1368,18 @@
                         <div class="insight-text">${domain.marketInsight}</div>
                     </div>
                     <div class="pricing-section">
-                        <span class="price-original">${formatPrice(domain.originalPrice)}</span>
-                        <span class="price-current">${formatPrice(domain.discountPrice)}</span>
+                        <div class="pricing-main">
+                            <span class="price-original">${formatPrice(domain.originalPrice)}</span>
+                            <span class="price-current">${formatPrice(domain.discountPrice)}</span>
+                        </div>
+                        <div class="pricing-context">
+                            <div class="pricing-context-line">Typical market comps: <span class="pricing-highlight">${compRange}</span></div>
+                            <div class="pricing-context-line">Portfolio release — $888. Instant transfer available.</div>
+                        </div>
                     </div>
                     <div class="cta-buttons">
-                        <a href="${domain.spaceshipLink}" target="_blank" class="btn btn-primary">View on Spaceship</a>
-                        <a href="${domain.godaddyLink}" target="_blank" class="btn btn-secondary">GoDaddy</a>
+                        <a href="${domain.spaceshipLink}" target="_blank" class="btn btn-primary">Buy Now on Spaceship</a>
+                        <a href="${domain.godaddyLink}" target="_blank" class="btn btn-secondary">Buy on GoDaddy</a>
                     </div>
                 </div>
             `;
